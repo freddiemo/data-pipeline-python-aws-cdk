@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.pytest_cache
+.venv/
+*.egg-info/
+
+# Node.js
+node_modules/
+package-lock.json
+
+# CDK
+.cdk.staging/
+cdk.out/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.log
+response.json
+lambda-package.zip
+lambda_package/
+
+# Scripts should be included but mark temp files
+scripts/*.log
+scripts/*.tmp

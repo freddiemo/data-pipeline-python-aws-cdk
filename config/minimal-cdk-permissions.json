@@ -1,0 +1,200 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "CDKBootstrapAndDeploy",
+            "Effect": "Allow",
+            "Action": [
+                "cloudformation:CreateStack",
+                "cloudformation:UpdateStack",
+                "cloudformation:DeleteStack",
+                "cloudformation:DescribeStacks",
+                "cloudformation:DescribeStackEvents",
+                "cloudformation:DescribeStackResources",
+                "cloudformation:GetTemplate",
+                "cloudformation:ValidateTemplate",
+                "cloudformation:CreateChangeSet",
+                "cloudformation:DescribeChangeSet",
+                "cloudformation:ExecuteChangeSet",
+                "cloudformation:DeleteChangeSet",
+                "cloudformation:ListStackResources"
+            ],
+            "Resource": [
+                "arn:aws:cloudformation:*:*:stack/CDKToolkit/*",
+                "arn:aws:cloudformation:*:*:stack/DataPipelineStack/*"
+            ]
+        },
+        {
+            "Sid": "S3BucketOperations",
+            "Effect": "Allow",
+            "Action": [
+                "s3:CreateBucket",
+                "s3:DeleteBucket",
+                "s3:GetBucketLocation",
+                "s3:GetBucketPolicy",
+                "s3:PutBucketPolicy",
+                "s3:DeleteBucketPolicy",
+                "s3:GetBucketVersioning",
+                "s3:PutBucketVersioning",
+                "s3:GetBucketLifecycleConfiguration",
+                "s3:PutBucketLifecycleConfiguration",
+                "s3:GetBucketNotification",
+                "s3:PutBucketNotification",
+                "s3:ListBucket",
+                "s3:GetObject",
+                "s3:PutObject",
+                "s3:DeleteObject"
+            ],
+            "Resource": [
+                "arn:aws:s3:::data-pipeline-bucket-*",
+                "arn:aws:s3:::data-pipeline-bucket-*/*",
+                "arn:aws:s3:::athena-results-bucket-*",
+                "arn:aws:s3:::athena-results-bucket-*/*",
+                "arn:aws:s3:::cdk-*"
+            ]
+        },
+        {
+            "Sid": "LambdaOperations",
+            "Effect": "Allow",
+            "Action": [
+                "lambda:CreateFunction",
+                "lambda:DeleteFunction",
+                "lambda:UpdateFunctionCode",
+                "lambda:UpdateFunctionConfiguration",
+                "lambda:GetFunction",
+                "lambda:ListFunctions",
+                "lambda:InvokeFunction",
+                "lambda:AddPermission",
+                "lambda:RemovePermission",
+                "lambda:GetPolicy"
+            ],
+            "Resource": "arn:aws:lambda:*:*:function:DataPipelineStack-*"
+        },
+        {
+            "Sid": "IAMRoleOperations",
+            "Effect": "Allow",
+            "Action": [
+                "iam:CreateRole",
+                "iam:DeleteRole",
+                "iam:GetRole",
+                "iam:UpdateRole",
+                "iam:AttachRolePolicy",
+                "iam:DetachRolePolicy",
+                "iam:PutRolePolicy",
+                "iam:DeleteRolePolicy",
+                "iam:GetRolePolicy",
+                "iam:ListRolePolicies",
+                "iam:ListAttachedRolePolicies",
+                "iam:PassRole"
+            ],
+            "Resource": [
+                "arn:aws:iam::*:role/DataPipelineStack-*",
+                "arn:aws:iam::*:role/cdk-*"
+            ]
+        },
+        {
+            "Sid": "GlueOperations",
+            "Effect": "Allow",
+            "Action": [
+                "glue:CreateDatabase",
+                "glue:DeleteDatabase",
+                "glue:GetDatabase",
+                "glue:UpdateDatabase",
+                "glue:CreateCrawler",
+                "glue:DeleteCrawler",
+                "glue:UpdateCrawler",
+                "glue:GetCrawler",
+                "glue:StartCrawler",
+                "glue:StopCrawler",
+                "glue:GetCrawlerMetrics",
+                "glue:GetTables",
+                "glue:GetTable",
+                "glue:CreateTable",
+                "glue:UpdateTable",
+                "glue:DeleteTable"
+            ],
+            "Resource": [
+                "arn:aws:glue:*:*:database/data_pipeline_db",
+                "arn:aws:glue:*:*:crawler/data-pipeline-crawler",
+                "arn:aws:glue:*:*:table/data_pipeline_db/*",
+                "arn:aws:glue:*:*:catalog"
+            ]
+        },
+        {
+            "Sid": "AthenaOperations",
+            "Effect": "Allow",
+            "Action": [
+                "athena:CreateWorkGroup",
+                "athena:DeleteWorkGroup",
+                "athena:UpdateWorkGroup",
+                "athena:GetWorkGroup",
+                "athena:StartQueryExecution",
+                "athena:StopQueryExecution",
+                "athena:GetQueryExecution",
+                "athena:GetQueryResults"
+            ],
+            "Resource": [
+                "arn:aws:athena:*:*:workgroup/data-pipeline-workgroup"
+            ]
+        },
+        {
+            "Sid": "LakeFormationOperations",
+            "Effect": "Allow",
+            "Action": [
+                "lakeformation:PutDataLakeSettings",
+                "lakeformation:GetDataLakeSettings",
+                "lakeformation:GrantPermissions",
+                "lakeformation:RevokePermissions",
+                "lakeformation:ListPermissions"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "EventBridgeOperations",
+            "Effect": "Allow",
+            "Action": [
+                "events:PutRule",
+                "events:DeleteRule",
+                "events:DescribeRule",
+                "events:PutTargets",
+                "events:RemoveTargets",
+                "events:ListTargetsByRule"
+            ],
+            "Resource": "arn:aws:events:*:*:rule/DataPipelineStack-*"
+        },
+        {
+            "Sid": "CloudWatchLogs",
+            "Effect": "Allow",
+            "Action": [
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:PutLogEvents",
+                "logs:DescribeLogGroups",
+                "logs:DescribeLogStreams"
+            ],
+            "Resource": "arn:aws:logs:*:*:log-group:/aws/lambda/DataPipelineStack-*"
+        },
+        {
+            "Sid": "STSOperations",
+            "Effect": "Allow",
+            "Action": [
+                "sts:GetCallerIdentity",
+                "sts:AssumeRole"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "CDKAssetOperations",
+            "Effect": "Allow",
+            "Action": [
+                "s3:GetObject",
+                "s3:PutObject",
+                "s3:ListBucket"
+            ],
+            "Resource": [
+                "arn:aws:s3:::cdk-*",
+                "arn:aws:s3:::cdk-*/*"
+            ]
+        }
+    ]
+}

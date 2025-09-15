@@ -1,0 +1,15 @@
+{
+  "name": "python-aws-cdk",
+  "version": "1.0.0",
+  "description": "A complete serverless data pipeline built with AWS CDK (Python) that extracts data from a public API, stores it in S3, catalogs it with AWS Glue, and makes it queryable through Amazon Athena, all while managing permissions through AWS Lake Formation.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "aws-cdk": "^2.1029.1"
+  }
+}
